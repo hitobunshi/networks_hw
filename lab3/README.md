@@ -66,7 +66,7 @@ conf t
 ip nat pool main 50.0.50.3 50.0.50.100 netmask 255.255.255.0
 access-list 100 permit ip 10.0.10.0 0.0.0.255 any
 access-list 100 permit ip 10.0.20.0 0.0.0.255 any
-ip nat inside source list 100 pool main
+ip nat inside source list 100 pool main overload
 int e0/0.10
 ip nat inside
 exit
