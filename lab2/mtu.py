@@ -37,12 +37,12 @@ def main():
     elif len(target) > 255 or not all(host_regex.match(part) for part in target.split(".")):
         print("Target is not valid")
         return
-    elif not check_ping(target, 2, 1):
+    elif not check_ping(target, 2, 0):
         print("Target unreachable")
         return
 
     # binary search
-    l = 1
+    l = 0
     r = 20000  # in case we have jumbos
     while l < r - 1:
         m = (l + r) // 2
@@ -52,7 +52,7 @@ def main():
             r = m
         time.sleep(0.1)  # to prevent too many pings
 
-    print(f"PMTU to {target} = {l} bytes payload (plus header)")
+    print(f"PMTU to {target} = {l + 28} bytes")
 
 
 if __name__ == '__main__':
